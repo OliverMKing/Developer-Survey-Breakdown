@@ -11,10 +11,4 @@ public interface ResponseService {
     ResponseDTO createNewResponse(ResponseDTO responseDTO);
     ResponseDTO saveAndReturnDTO(Response response);
     ResponseDTO saveResponseByDTO(Long id, ResponseDTO responseDTO);
-    List<ResponseDTO> findAllByCountry(String country);
-    List<ResponseDTO> findAllByFormalEducation(String formalEducation);
-    List<ResponseDTO> findAllByDevType(String devType);
-    List<ResponseDTO> findAllByYearsCoding(Integer yearsCoding);
-    List<ResponseDTO> findAllByJobSatisfaction(String jobSatisfaction);
-    List<ResponseDTO> findAllBySalary(String salary);
 }
