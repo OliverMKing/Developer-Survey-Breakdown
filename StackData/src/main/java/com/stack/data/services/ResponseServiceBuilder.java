@@ -18,8 +18,8 @@ public class ResponseServiceBuilder {
 
     public ResponseServiceBuilder(ResponseRepository responseRepository, ResponseMapper responseMapper) {
         this.responseRepository = responseRepository;
-        this.stream = responseRepository.findAll().stream();
         this.responseMapper = responseMapper;
+        this.stream = this.responseRepository.findAll().stream();
     }
 
     public ResponseServiceBuilder country(String country) {
@@ -39,6 +39,16 @@ public class ResponseServiceBuilder {
 
     public ResponseServiceBuilder yearsCoding(Integer yearsCoding) {
         this.stream = stream.filter(response -> response.getYearsCoding().equals(yearsCoding));
+        return this;
+    }
+
+    public ResponseServiceBuilder jobSatisfaction(String jobSatisfaction) {
+        this.stream = stream.filter(response -> response.getJobSatisfaction().equals(jobSatisfaction));
+        return this;
+    }
+
+    public ResponseServiceBuilder salary(Double salary) {
+        this.stream = stream.filter(response -> response.getSalary().equals(salary));
         return this;
     }
 
