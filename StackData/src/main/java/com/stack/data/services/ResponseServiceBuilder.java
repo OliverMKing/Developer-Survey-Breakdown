@@ -53,6 +53,16 @@ public class ResponseServiceBuilder {
         return this;
     }
 
+    public ResponseServiceBuilder salaryGreaterThan(Double salaryGreaterThan) {
+        this.stream = this.stream.filter(response -> (response.getSalary() != null) ? response.getSalary() >= salaryGreaterThan : false);
+        return this;
+    }
+
+    public ResponseServiceBuilder salaryLessThan(Double salaryLessThan) {
+        this.stream = this.stream.filter(response -> (response.getSalary() != null) ? response.getSalary() <= salaryLessThan : false);
+        return this;
+    }
+
     public List<ResponseDTO> build() {
         return this.stream.map(response -> {
             ResponseDTO responseDTO = responseMapper.responseToResponseDTO(response);

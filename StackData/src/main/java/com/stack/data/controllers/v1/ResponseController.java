@@ -31,7 +31,9 @@ public class ResponseController {
                                         @RequestParam(name = "devType", required = false) String devType,
                                         @RequestParam(name = "yearsCoding", required = false) String yearsCoding,
                                         @RequestParam(name = "jobSatisfaction", required = false) String jobSatisfaction,
-                                        @RequestParam(name = "salary", required = false) Double salary
+                                        @RequestParam(name = "salary", required = false) Double salary,
+                                        @RequestParam(name = "salaryGreaterThan", required = false) Double salaryGreaterThan,
+                                        @RequestParam(name = "salaryLessThan", required = false) Double salaryLessThan
                                         ) {
         ResponseServiceBuilder responseServiceBuilder = new ResponseServiceBuilder(responseRepository, responseMapper);
         if (country != null)
@@ -46,6 +48,10 @@ public class ResponseController {
             responseServiceBuilder.jobSatisfaction(jobSatisfaction);
         if (salary != null)
             responseServiceBuilder.salary(salary);
+        if (salaryGreaterThan != null)
+            responseServiceBuilder.salaryGreaterThan(salaryGreaterThan);
+        if (salaryLessThan != null)
+            responseServiceBuilder.salaryLessThan(salaryLessThan);
         return new ResponseListDTO(responseServiceBuilder.build());
     }
 }
