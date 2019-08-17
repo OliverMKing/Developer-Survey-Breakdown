@@ -19,6 +19,10 @@ public class ResponseStatsDTO {
     }
 
     private void setLanguagesAndFrameworks(List<ResponseDTO> responseDTOS) {
+        fillLanguageAndFrameworksMaps(responseDTOS, languages, frameworks);
+    }
+
+    static void fillLanguageAndFrameworksMaps(List<ResponseDTO> responseDTOS, Map<String, Integer> languages, Map<String, Integer> frameworks) {
         for (ResponseDTO response : responseDTOS) {
             for (String language : response.getLanguages()) {
                 languages.put(language, languages.getOrDefault(language, 0) + 1);

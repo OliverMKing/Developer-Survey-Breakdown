@@ -21,14 +21,7 @@ public class ResponseListDTO {
     }
 
     private void setLanguagesAndFrameworks() {
-        for (ResponseDTO response : responseDTOS) {
-            for (String language : response.getLanguages()) {
-                languages.put(language, languages.getOrDefault(language, 0) + 1);
-            }
-            for (String framework : response.getFrameworks()) {
-                frameworks.put(framework, frameworks.getOrDefault(framework, 0) + 1);
-            }
-        }
+        ResponseStatsDTO.fillLanguageAndFrameworksMaps(responseDTOS, languages, frameworks);
     }
 
     public Integer getResponseCount() {
