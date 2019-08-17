@@ -11,4 +11,6 @@ public interface ResponseMapper {
     ResponseMapper INSTANCE = Mappers.getMapper(ResponseMapper.class);
 
     ResponseDTO responseToResponseDTO(Response response);
+
+    Response reponseDtoToResponse(ResponseDTO responseDTO);
 }
