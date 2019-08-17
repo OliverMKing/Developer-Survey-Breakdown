@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -50,7 +51,14 @@ public class Bootstrap implements CommandLineRunner {
                     responseDTO.setJobSatisfaction(line[12]);
                 if (!line[54].equals("NA"))
                     responseDTO.setSalary(Double.valueOf(line[54]));
-
+                if (!line[65].equals("NA")) {
+                    String[] languages = line[65].split(";");
+                    responseDTO.setLanguages(new HashSet<String>(Arrays.asList(languages)));
+                }
+                if (!line[71].equals("NA")) {
+                    String[] frameworks = line[71].split(";");
+                    responseDTO.setFrameworks(new HashSet<String>(Arrays.asList(frameworks)));
+                }
                 responseService.createNewResponse(responseDTO);
             }
             logger.info("Done loading data from CSV");
