@@ -29,7 +29,7 @@ public class ResponseController {
     public ResponseListDTO getResponses(@RequestParam(name = "country", required = false) String country,
                                         @RequestParam(name = "formalEducation", required = false) String formalEducation,
                                         @RequestParam(name = "devType", required = false) String devType,
-                                        @RequestParam(name = "yearsCoding", required = false) Integer yearsCoding,
+                                        @RequestParam(name = "yearsCoding", required = false) String yearsCoding,
                                         @RequestParam(name = "jobSatisfaction", required = false) String jobSatisfaction,
                                         @RequestParam(name = "salary", required = false) Double salary
                                         ) {

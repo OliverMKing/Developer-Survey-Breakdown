@@ -1,5 +1,6 @@
 package com.stack.data.domain;
 
+import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import java.util.Set;
@@ -9,8 +10,9 @@ public class Response extends BaseEntity {
 
     private String country;
     private String formalEducation;
+    @Column(length = 1000)
     private String devType;
-    private Integer yearsCoding;
+    private String yearsCoding;
     private String jobSatisfaction;
     private Double salary;
 
@@ -24,7 +26,7 @@ public class Response extends BaseEntity {
     }
 
     public Response(String country, String formalEducation,
-                    String devType, Integer yearsCoding,
+                    String devType, String yearsCoding,
                     String jobSatisfaction, Double salary,
                     Set<String> languages, Set<String> frameworks) {
         this.country = country;
@@ -61,11 +63,11 @@ public class Response extends BaseEntity {
         this.devType = devType;
     }
 
-    public Integer getYearsCoding() {
+    public String getYearsCoding() {
         return yearsCoding;
     }
 
-    public void setYearsCoding(Integer yearsCoding) {
+    public void setYearsCoding(String yearsCoding) {
         this.yearsCoding = yearsCoding;
     }
 

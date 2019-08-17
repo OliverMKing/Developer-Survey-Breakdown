@@ -35,9 +35,23 @@ public class Bootstrap implements CommandLineRunner {
         CSVReader reader = null;
         try {
             reader = new CSVReader(new FileReader(CSV_URL));
-            String[] line;
+            String[] line = reader.readNext();
             while ((line = reader.readNext()) != null) {
-                System.out.println(line[6]);
+                ResponseDTO responseDTO = new ResponseDTO();
+                if (!line[3].equals("NA"))
+                    responseDTO.setCountry(line[3]);
+                if (!line[6].equals("NA"))
+                    responseDTO.setFormalEducation(line[6]);
+                if (!line[9].equals("NA"))
+                    responseDTO.setDevType(line[9]);
+                if (!line[10].equals("NA"))
+                    responseDTO.setYearsCoding(line[10]);
+                if (!line[12].equals("NA"))
+                    responseDTO.setJobSatisfaction(line[12]);
+                if (!line[54].equals("NA"))
+                    responseDTO.setSalary(Double.valueOf(line[54]));
+
+                responseService.createNewResponse(responseDTO);
             }
             logger.info("Done loading data from CSV");
         } catch (Exception e) {

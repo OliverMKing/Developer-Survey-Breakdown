@@ -6,6 +6,7 @@ import com.stack.data.domain.Response;
 import com.stack.data.repositories.ResponseRepository;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -23,32 +24,32 @@ public class ResponseServiceBuilder {
     }
 
     public ResponseServiceBuilder country(String country) {
-        this.stream = stream.filter(response -> response.getCountry().equals(country));
+        this.stream = this.stream.filter(response -> Objects.equals(response.getCountry(), country));
         return this;
     }
 
     public ResponseServiceBuilder formalEducation(String formalEducation) {
-        this.stream = stream.filter(response -> response.getFormalEducation().equals(formalEducation));
+        this.stream = this.stream.filter(response -> Objects.equals(response.getFormalEducation(), formalEducation));
         return this;
     }
 
     public ResponseServiceBuilder devType(String devType) {
-        this.stream = stream.filter(response -> response.getDevType().equals(devType));
+        this.stream = this.stream.filter(response -> (response.getDevType() != null) ? response.getDevType().contains(devType) : false);
         return this;
     }
 
-    public ResponseServiceBuilder yearsCoding(Integer yearsCoding) {
-        this.stream = stream.filter(response -> response.getYearsCoding().equals(yearsCoding));
+    public ResponseServiceBuilder yearsCoding(String yearsCoding) {
+        this.stream = this.stream.filter(response -> Objects.equals(response.getYearsCoding(), yearsCoding));
         return this;
     }
 
     public ResponseServiceBuilder jobSatisfaction(String jobSatisfaction) {
-        this.stream = stream.filter(response -> response.getJobSatisfaction().equals(jobSatisfaction));
+        this.stream = this.stream.filter(response -> Objects.equals(response.getJobSatisfaction(), jobSatisfaction));
         return this;
     }
 
     public ResponseServiceBuilder salary(Double salary) {
-        this.stream = stream.filter(response -> response.getSalary().equals(salary));
+        this.stream = this.stream.filter(response -> Objects.equals(response.getSalary(), salary));
         return this;
     }
 

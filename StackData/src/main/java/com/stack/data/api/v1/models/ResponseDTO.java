@@ -8,7 +8,7 @@ public class ResponseDTO {
     private String country;
     private String formalEducation;
     private String devType;
-    private Integer yearsCoding;
+    private String yearsCoding;
     private String jobSatisfaction;
     private Double salary;
     private Set<String> languages;
@@ -18,7 +18,7 @@ public class ResponseDTO {
     }
 
     public ResponseDTO(Long id, String country, String formalEducation,
-                       String devType, Integer yearsCoding,
+                       String devType, String yearsCoding,
                        String jobSatisfaction, Double salary,
                        Set<String> languages, Set<String> frameworks) {
         this.id = id;
@@ -64,11 +64,11 @@ public class ResponseDTO {
         this.devType = devType;
     }
 
-    public Integer getYearsCoding() {
+    public String getYearsCoding() {
         return yearsCoding;
     }
 
-    public void setYearsCoding(Integer yearsCoding) {
+    public void setYearsCoding(String yearsCoding) {
         this.yearsCoding = yearsCoding;
     }
 
