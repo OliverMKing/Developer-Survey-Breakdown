@@ -33,7 +33,7 @@ public class ResponseServiceImpl implements ResponseService {
 
     @Override
     public ResponseDTO createNewResponse(ResponseDTO responseDTO) {
-        return saveAndReturnDTO(responseMapper.reponseDtoToResponse(responseDTO));
+        return saveAndReturnDTO(responseMapper.responseDtoToResponse(responseDTO));
     }
 
     @Override
@@ -45,7 +45,7 @@ public class ResponseServiceImpl implements ResponseService {
 
     @Override
     public ResponseDTO saveResponseByDTO(Long id, ResponseDTO responseDTO) {
-        Response response = responseMapper.reponseDtoToResponse(responseDTO);
+        Response response = responseMapper.responseDtoToResponse(responseDTO);
         response.setId(id);
         return saveAndReturnDTO(response);
     }

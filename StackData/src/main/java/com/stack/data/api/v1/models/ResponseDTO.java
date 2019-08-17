@@ -14,6 +14,24 @@ public class ResponseDTO {
     private Set<String> languages;
     private Set<String> frameworks;
 
+    public ResponseDTO() {
+    }
+
+    public ResponseDTO(Long id, String country, String formalEducation,
+                       String devType, Integer yearsCoding,
+                       String jobSatisfaction, Double salary,
+                       Set<String> languages, Set<String> frameworks) {
+        this.id = id;
+        this.country = country;
+        this.formalEducation = formalEducation;
+        this.devType = devType;
+        this.yearsCoding = yearsCoding;
+        this.jobSatisfaction = jobSatisfaction;
+        this.salary = salary;
+        this.languages = languages;
+        this.frameworks = frameworks;
+    }
+
     public Long getId() {
         return id;
     }
