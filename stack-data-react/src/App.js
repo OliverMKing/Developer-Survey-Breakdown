@@ -13,9 +13,11 @@ class App extends React.Component {
   }
 
   handleAddGraph(event) {
-    this.setState({
-      graphs: this.state.graphs + 1
-    });
+    this.state.graphs < 6
+      ? this.setState({
+          graphs: this.state.graphs + 1
+        })
+      : alert("You can't add any more graphs. 6 is the maximum.");
   }
 
   handleRemoveGraph(event) {
@@ -26,8 +28,18 @@ class App extends React.Component {
 
   render() {
     const graphs = [];
+    const colors = [
+      "#33b5e5",
+      "#ff4444",
+      "#00C851",
+      "#ffbb33",
+      "#2BBBAD",
+      "#aa66cc"
+    ];
     for (var i = 0; i < this.state.graphs; i += 1) {
-      graphs.push(<GraphDisplay number={i} />);
+      graphs.push(
+        <GraphDisplay number={i} languages={colors[i]} frameworks={colors[i]} />
+      );
     }
 
     return (
