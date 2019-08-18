@@ -114,7 +114,7 @@ class GraphDisplay extends React.Component {
   handleCountryChange(event) {
     this.setState({
       data: this.state.data,
-      loaded: true,
+      loaded: false,
       call: this.state.call,
       country: event.target.value,
       education: this.state.education,
@@ -137,34 +137,34 @@ class GraphDisplay extends React.Component {
             id="country"
             onChange={this.handleCountryChange}
           >
-            <option>All</option>
+            <option>{this.state.country}</option>
             <option>Afghanistan</option>
             <option>Albania</option>
           </select>
 
           <label for="education">Education</label>
           <select className="form-control" id="education">
-            <option>All</option>
+            <option>{this.state.education}</option>
           </select>
 
           <label for="devType">Developer Type</label>
           <select className="form-control" id="devType">
-            <option>All</option>
+            <option>{this.state.devType}</option>
           </select>
 
           <label for="yearsCoding">Years Coding</label>
           <select className="form-control" id="yearsCoding">
-            <option>All</option>
+            <option>{this.state.yearsCoding}</option>
           </select>
 
           <label for="jobSatisfaction">Job Satisfaction</label>
           <select className="form-control" id="jobSatisfaction">
-            <option>All</option>
+            <option>{this.state.jobSatisfaction}</option>
           </select>
 
           <label for="salaryGreaterThan">Salary Greater Than</label>
           <select className="form-control" id="salaryGreaterThan">
-            <option>All</option>
+            <option>{this.state.salaryGreaterThan}</option>
           </select>
 
           <br />
