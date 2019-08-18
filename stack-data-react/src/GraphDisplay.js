@@ -297,7 +297,6 @@ class GraphDisplay extends React.Component {
 
   render() {
     if (this.state.loaded) {
-      console.log(this.state.country);
       return (
         <div>
           <h2>Languages</h2>
@@ -389,36 +388,47 @@ class GraphDisplay extends React.Component {
             <option>$2,000,000</option>
           </select>
 
-          <br />
-          <h5 className="lead text-muted">
-            Responses: {this.state.responseCount}
-          </h5>
-          <br />
+          {this.state.data.length > 1 ? (
+            <div>
+              <br />
+              <h5 className="lead text-muted">
+                Responses: {this.state.responseCount}
+              </h5>
+              <br />
 
-          <Chart
-            width={"80%"}
-            height={"750px"}
-            chartType="Bar"
-            loader={<div>Loading Chart</div>}
-            data={this.state.data}
-            options={{
-              hAxis: {
-                title: "Developers",
-                minValue: 0
-              },
-              vAxis: {
-                title: "Languages"
-              },
-              bars: "horizontal",
+              <Chart
+                width={"80%"}
+                height={"750px"}
+                chartType="Bar"
+                loader={<div>Loading Chart</div>}
+                data={this.state.data}
+                options={{
+                  hAxis: {
+                    title: "Developers",
+                    minValue: 0
+                  },
+                  vAxis: {
+                    title: "Languages"
+                  },
+                  bars: "horizontal",
 
-              axes: {
-                y: {
-                  0: { side: "left" }
-                }
-              },
-              legend: { position: "none" }
-            }}
-          />
+                  axes: {
+                    y: {
+                      0: { side: "left" }
+                    }
+                  },
+                  legend: { position: "none" }
+                }}
+              />
+            </div>
+          ) : (
+            <div>
+              <br />
+              <h5 className="lead text-muted">
+                There are 0 results for those parameters
+              </h5>
+            </div>
+          )}
         </div>
       );
     } else {
