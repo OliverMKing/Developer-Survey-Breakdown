@@ -20,49 +20,86 @@ class GraphDisplay extends React.Component {
         ]
       ],
       loaded: false,
-      call: "http://localhost:8080/api/v1/responses/stats?",
       country: "",
       education: "",
       devType: "",
       yearsCoding: "",
       jobSatisfaction: "",
-      salaryGreaterThan: ""
+      salaryGreaterThan: "",
+      responseCountries: [],
+      responseEducation: [],
+      responseDevTypes: [],
+      responseYearsCoding: [],
+      responseSatisfactions: []
     };
 
     this.handleCountryChange = this.handleCountryChange.bind(this);
   }
 
   componentDidMount() {
-    this.callAPI();
+    this.initialCallAPI();
   }
 
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    this.callAPI();
-  }
-
-  callAPI() {
+  initialCallAPI() {
     axios.get(this.generateCall()).then(response => {
-      let lang_data = [this.state.data[0]];
+      let langData = [this.state.data[0]];
       for (const [language, count] of Object.entries(response.data.languages)) {
         const row = [language, count, "#007bff", null];
-        lang_data.push(row);
+        langData.push(row);
       }
+
+      const countries = Object.keys(response.data.countries);
+      const education = Object.keys(response.data.education);
+      const devTypes = Object.keys(response.data.devTypes);
+      const yearsCoding = Object.keys(response.data.yearsCoding);
+      const satisfactions = Object.keys(response.data.jobSatisfactions);
+
       this.setState({
-        data: lang_data,
+        data: langData,
         loaded: true,
-        call: this.state.call,
         country: this.state.country,
         education: this.state.education,
         devType: this.state.devType,
         yearsCoding: this.state.yearsCoding,
         jobSatisfaction: this.state.jobSatisfaction,
-        salaryGreaterThan: this.state.salaryGreaterThan
+        salaryGreaterThan: this.state.salaryGreaterThan,
+        responseCountries: countries,
+        responseEducation: education,
+        responseDevTypes: devTypes,
+        responseYearsCoding: yearsCoding,
+        responseSatisfactions: satisfactions
+      });
+    });
+  }
+
+  callAPI() {
+    axios.get(this.generateCall()).then(response => {
+      let langData = [this.state.data[0]];
+      for (const [language, count] of Object.entries(response.data.languages)) {
+        const row = [language, count, "#007bff", null];
+        langData.push(row);
+      }
+
+      this.setState({
+        data: langData,
+        loaded: true,
+        country: this.state.country,
+        education: this.state.education,
+        devType: this.state.devType,
+        yearsCoding: this.state.yearsCoding,
+        jobSatisfaction: this.state.jobSatisfaction,
+        salaryGreaterThan: this.state.salaryGreaterThan,
+        responseCountries: this.state.responseCountries,
+        responseEducation: this.state.responseEducation,
+        responseDevTypes: this.state.responseDevTypes,
+        responseYearsCoding: this.state.responseYearsCoding,
+        responseSatisfactions: this.state.responseSatisfactions
       });
     });
   }
 
   generateCall() {
-    let call = this.state.call;
+    let call = "http://localhost:8080/api/v1/responses/stats?";
     let params = 0;
 
     if (this.state.country) {
@@ -112,26 +149,34 @@ class GraphDisplay extends React.Component {
   }
 
   handleCountryChange(event) {
-    this.setState({
-      data: this.state.data,
-      loaded: false,
-      call: this.state.call,
-      country: event.target.value,
-      education: this.state.education,
-      devType: this.state.devType,
-      yearsCoding: this.state.yearsCoding,
-      jobSatisfaction: this.state.jobSatisfaction,
-      salaryGreaterThan: this.state.salaryGreaterThan
-    });
+    this.setState(
+      {
+        data: this.state.data,
+        loaded: false,
+        country: event.target.value,
+        education: this.state.education,
+        devType: this.state.devType,
+        yearsCoding: this.state.yearsCoding,
+        jobSatisfaction: this.state.jobSatisfaction,
+        salaryGreaterThan: this.state.salaryGreaterThan,
+        responseCountries: this.state.responseCountries,
+        responseEducation: this.state.responseEducation,
+        responseDevTypes: this.state.responseDevTypes,
+        responseYearsCoding: this.state.responseYearsCoding,
+        responseSatisfactions: this.state.responseSatisfactions
+      },
+      this.callAPI
+    );
   }
 
   render() {
     if (this.state.loaded) {
+      console.log(this.state.country);
       return (
         <div>
           <h2>Languages</h2>
 
-          <label for="country">Country</label>
+          <label>Country</label>
           <select
             className="form-control"
             id="country"
@@ -139,35 +184,36 @@ class GraphDisplay extends React.Component {
           >
             <option>{this.state.country}</option>
             <option />
-            <option>Afghanistan</option>
-            <option>Albania</option>
+            {this.state.responseCountries.map(value => {
+              return <option>{value}</option>;
+            })}
           </select>
 
-          <label for="education">Education</label>
+          <label>Education</label>
           <select className="form-control" id="education">
             <option>{this.state.education}</option>
             <option />
           </select>
 
-          <label for="devType">Developer Type</label>
+          <label>Developer Type</label>
           <select className="form-control" id="devType">
             <option>{this.state.devType}</option>
             <option />
           </select>
 
-          <label for="yearsCoding">Years Coding</label>
+          <label>Years Coding</label>
           <select className="form-control" id="yearsCoding">
             <option>{this.state.yearsCoding}</option>
             <option />
           </select>
 
-          <label for="jobSatisfaction">Job Satisfaction</label>
+          <label>Job Satisfaction</label>
           <select className="form-control" id="jobSatisfaction">
             <option>{this.state.jobSatisfaction}</option>
             <option />
           </select>
 
-          <label for="salaryGreaterThan">Salary Greater Than</label>
+          <label>Salary Greater Than</label>
           <select className="form-control" id="salaryGreaterThan">
             <option>{this.state.salaryGreaterThan}</option>
             <option />
@@ -175,7 +221,7 @@ class GraphDisplay extends React.Component {
 
           <br />
           <Chart
-            width={"400px"}
+            width={"80%"}
             height={"750px"}
             chartType="Bar"
             loader={<div>Loading Chart</div>}
