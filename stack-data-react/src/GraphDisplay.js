@@ -19,13 +19,23 @@ class GraphDisplay extends React.Component {
           }
         ]
       ],
-      loaded: false
+      loaded: false,
+      call: "http://localhost:8080/api/v1/responses/stats?",
+      country: "",
+      education: "",
+      devType: "",
+      yearsCoding: "",
+      jobSatisfaction: "",
+      salaryGreaterThan: ""
     };
-    this.handleClick = this.handleClick.bind(this);
   }
 
   componentDidMount() {
-    axios.get("http://localhost:8080/api/v1/responses/stats").then(response => {
+    this.callAPI();
+  }
+
+  callAPI() {
+    axios.get(this.generateCall()).then(response => {
       let lang_data = [this.state.data[0]];
       for (const [language, count] of Object.entries(response.data.languages)) {
         const row = [language, count, "#007bff", null];
@@ -33,22 +43,66 @@ class GraphDisplay extends React.Component {
       }
       this.setState({
         data: lang_data,
-        loaded: true
+        loaded: true,
+        call: this.state.call,
+        country: this.state.country,
+        education: this.state.education,
+        devType: this.state.devType,
+        yearsCoding: this.state.yearsCoding,
+        jobSatisfaction: this.state.jobSatisfaction,
+        salaryGreaterThan: this.state.salaryGreaterThan
       });
     });
   }
 
-  handleClick() {
-    axios.get("http://localhost:8080/api/v1/responses/stats").then(response => {
-      let lang_data = [this.state.data[0]];
-      for (const [language, count] of Object.entries(response.data.languages)) {
-        const row = [language, count, "#007bff", null];
-        lang_data.push(row);
+  generateCall() {
+    let call = this.state.call;
+    let params = 0;
+
+    if (this.state.country) {
+      if (params > 0) {
+        call += "&";
       }
-      this.setState({
-        data: lang_data
-      });
-    });
+      call += "country=" + this.state.country;
+      params += 1;
+    }
+    if (this.state.education) {
+      if (params > 0) {
+        call += "&";
+      }
+      call += "formalEducation=" + this.state.education;
+      params += 1;
+    }
+    if (this.state.devType) {
+      if (params > 0) {
+        call += "&";
+      }
+      call += "devType=" + this.state.devType;
+      params += 1;
+    }
+    if (this.state.yearsCoding) {
+      if (params > 0) {
+        call += "&";
+      }
+      call += "yearsCoding=" + this.state.yearsCoding;
+      params += 1;
+    }
+    if (this.state.jobSatisfaction) {
+      if (params > 0) {
+        call += "&";
+      }
+      call += "jobSatisfaction=" + this.state.jobSatisfaction;
+      params += 1;
+    }
+    if (this.state.salaryGreaterThan) {
+      if (params > 0) {
+        call += "&";
+      }
+      call += "salaryGreaterThan=" + this.state.salaryGreaterThan;
+      params += 1;
+    }
+
+    return call;
   }
 
   render() {
@@ -56,8 +110,51 @@ class GraphDisplay extends React.Component {
       return (
         <div>
           <h2>Languages</h2>
+
+          <label for="country">Country</label>
+          <select className="form-control" id="country">
+            <option>All</option>
+            <option>U.S.</option>
+          </select>
+
+          <label for="education">Education</label>
+          <select className="form-control" id="education">
+            <option>All</option>
+            <option>BS</option>
+            <option>BA</option>
+          </select>
+
+          <label for="devType">Developer Type</label>
+          <select className="form-control" id="devType">
+            <option>All</option>
+            <option>Full-stack</option>
+            <option>Front-end</option>
+          </select>
+
+          <label for="yearsCoding">Years Coding</label>
+          <select className="form-control" id="yearsCoding">
+            <option>All</option>
+            <option>0 - 1</option>
+            <option>1+</option>
+          </select>
+
+          <label for="jobSatisfaction">Job Satisfaction</label>
+          <select className="form-control" id="jobSatisfaction">
+            <option>All</option>
+            <option>Good</option>
+            <option>Bad</option>
+          </select>
+
+          <label for="salaryGreaterThan">Salary Greater Than</label>
+          <select className="form-control" id="salaryGreaterThan">
+            <option>All</option>
+            <option>$0</option>
+            <option>$100</option>
+          </select>
+
+          <br />
           <Chart
-            width={"500px"}
+            width={"300px"}
             height={"750px"}
             chartType="Bar"
             loader={<div>Loading Chart</div>}
@@ -80,13 +177,6 @@ class GraphDisplay extends React.Component {
               legend: { position: "none" }
             }}
           />
-          <button
-            type="button"
-            className="btn btn-primary"
-            onClick={this.handleClick}
-          >
-            Test
-          </button>
         </div>
       );
     } else {
