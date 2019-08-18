@@ -9,11 +9,18 @@ class App extends React.Component {
     };
 
     this.handleAddGraph = this.handleAddGraph.bind(this);
+    this.handleRemoveGraph = this.handleRemoveGraph.bind(this);
   }
 
   handleAddGraph(event) {
     this.setState({
       graphs: this.state.graphs + 1
+    });
+  }
+
+  handleRemoveGraph(event) {
+    this.setState({
+      graphs: this.state.graphs - 1
     });
   }
 
@@ -35,10 +42,26 @@ class App extends React.Component {
         </div>
         {graphs}
         <br />
+        {this.state.graphs > 0 ? (
+          <div>
+            <div className="col text-center">
+              <button
+                type="button"
+                class="btn btn-outline-danger"
+                onClick={this.handleRemoveGraph}
+              >
+                Remove Graph
+              </button>
+            </div>
+            <br />
+          </div>
+        ) : (
+          <div />
+        )}
         <div className="col text-center">
           <button
             type="button"
-            class="btn btn-success"
+            class="btn btn-outline-success"
             onClick={this.handleAddGraph}
           >
             Add Graph

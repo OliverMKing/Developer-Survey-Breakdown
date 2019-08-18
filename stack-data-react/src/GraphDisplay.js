@@ -339,7 +339,7 @@ class GraphDisplay extends React.Component {
           <br />
           <hr />
           <button
-            class="btn btn-primary"
+            class="btn btn-outline-primary"
             type="button"
             data-toggle="collapse"
             data-target={"#" + this.props.number}
@@ -349,7 +349,7 @@ class GraphDisplay extends React.Component {
             Toggle Options
           </button>
 
-          <div class="collapse" id={this.props.number}>
+          <div class="collapse show" id={this.props.number}>
             <label>Country</label>
             <select
               className="form-control"
@@ -537,7 +537,12 @@ class GraphDisplay extends React.Component {
         </div>
       );
     } else {
-      return <div>Loading...</div>;
+      return (
+        <div>
+          <hr />
+          Loading...
+        </div>
+      );
     }
   }
 }
