@@ -336,100 +336,114 @@ class GraphDisplay extends React.Component {
     if (this.state.loaded) {
       return (
         <div>
-          <label>Country</label>
-          <select
-            className="form-control"
-            id="country"
-            onChange={this.handleCountryChange}
+          <br />
+          <button
+            class="btn btn-primary"
+            type="button"
+            data-toggle="collapse"
+            data-target="#options"
+            aria-expanded="false"
+            aria-controls="options"
           >
-            <option>{this.state.country}</option>
-            <option />
-            {this.state.responseCountries.map(value => {
-              return <option>{value}</option>;
-            })}
-          </select>
+            Toggle Options
+          </button>
 
-          <label>Education</label>
-          <select
-            className="form-control"
-            id="education"
-            onChange={this.handleEducationChange}
-          >
-            <option>{this.state.education}</option>
-            <option />
-            {this.state.responseEducation.map(value => {
-              return <option>{value}</option>;
-            })}
-          </select>
+          <div class="collapse" id="options">
+            <label>Country</label>
+            <select
+              className="form-control"
+              id="country"
+              onChange={this.handleCountryChange}
+            >
+              <option>{this.state.country}</option>
+              <option />
+              {this.state.responseCountries.map(value => {
+                return <option>{value}</option>;
+              })}
+            </select>
 
-          <label>Developer Type</label>
-          <select
-            className="form-control"
-            id="devType"
-            onChange={this.handleDeveloperTypeChange}
-          >
-            <option>{this.state.devType}</option>
-            <option />
-            {this.state.responseDevTypes.map(value => {
-              return <option>{value}</option>;
-            })}
-          </select>
+            <label>Education</label>
+            <select
+              className="form-control"
+              id="education"
+              onChange={this.handleEducationChange}
+            >
+              <option>{this.state.education}</option>
+              <option />
+              {this.state.responseEducation.map(value => {
+                return <option>{value}</option>;
+              })}
+            </select>
 
-          <label>Years Coding</label>
-          <select
-            className="form-control"
-            id="yearsCoding"
-            onChange={this.handleYearsCodingChange}
-          >
-            <option>{this.state.yearsCoding}</option>
-            <option />
-            {this.state.responseYearsCoding.map(value => {
-              return <option>{value}</option>;
-            })}
-          </select>
+            <label>Developer Type</label>
+            <select
+              className="form-control"
+              id="devType"
+              onChange={this.handleDeveloperTypeChange}
+            >
+              <option>{this.state.devType}</option>
+              <option />
+              {this.state.responseDevTypes.map(value => {
+                return <option>{value}</option>;
+              })}
+            </select>
 
-          <label>Job Satisfaction</label>
-          <select
-            className="form-control"
-            id="jobSatisfaction"
-            onChange={this.handleJobSatisfactionChange}
-          >
-            <option>{this.state.jobSatisfaction}</option>
-            <option />
-            {this.state.responseSatisfactions.map(value => {
-              return <option>{value}</option>;
-            })}
-          </select>
+            <label>Years Coding</label>
+            <select
+              className="form-control"
+              id="yearsCoding"
+              onChange={this.handleYearsCodingChange}
+            >
+              <option>{this.state.yearsCoding}</option>
+              <option />
+              {this.state.responseYearsCoding.map(value => {
+                return <option>{value}</option>;
+              })}
+            </select>
 
-          <label>Salary Greater Than</label>
-          <select
-            className="form-control"
-            id="salaryGreaterThan"
-            onChange={this.handleSalaryGreaterThanChange}
-          >
-            <option>
-              {this.state.salaryGreaterThan
-                ? "$" +
-                  this.state.salaryGreaterThan.replace(
-                    /\B(?=(\d{3})+(?!\d))/g,
-                    ","
-                  )
-                : ""}
-            </option>
-            <option />
-            <option>$20,000</option>
-            <option>$40,000</option>
-            <option>$60,000</option>
-            <option>$80,000</option>
-            <option>$100,000</option>
-            <option>$200,000</option>
-            <option>$400,000</option>
-            <option>$600,000</option>
-            <option>$800,000</option>
-            <option>$1,000,000</option>
-            <option>$1,500,000</option>
-            <option>$2,000,000</option>
-          </select>
+            <label>Job Satisfaction</label>
+            <select
+              className="form-control"
+              id="jobSatisfaction"
+              onChange={this.handleJobSatisfactionChange}
+            >
+              <option>{this.state.jobSatisfaction}</option>
+              <option />
+              {this.state.responseSatisfactions.map(value => {
+                return <option>{value}</option>;
+              })}
+            </select>
+
+            <label>Salary Greater Than</label>
+            <select
+              className="form-control"
+              id="salaryGreaterThan"
+              onChange={this.handleSalaryGreaterThanChange}
+            >
+              <option>
+                {this.state.salaryGreaterThan
+                  ? "$" +
+                    this.state.salaryGreaterThan.replace(
+                      /\B(?=(\d{3})+(?!\d))/g,
+                      ","
+                    )
+                  : ""}
+              </option>
+              <option />
+              <option>$20,000</option>
+              <option>$40,000</option>
+              <option>$60,000</option>
+              <option>$80,000</option>
+              <option>$100,000</option>
+              <option>$200,000</option>
+              <option>$400,000</option>
+              <option>$600,000</option>
+              <option>$800,000</option>
+              <option>$1,000,000</option>
+              <option>$1,500,000</option>
+              <option>$2,000,000</option>
+            </select>
+          </div>
 
           {this.state.data.length > 1 ? (
             <div>

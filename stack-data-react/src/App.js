@@ -13,6 +13,13 @@ function App() {
         </h4>
       </div>
       <GraphDisplay />
+      <br />
+      <div className="col text-center">
+        <button type="button" class="btn btn-success">
+          Add Graph
+        </button>
+      </div>
+      <br />
     </div>
   );
 }
