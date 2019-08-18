@@ -28,9 +28,15 @@ class GraphDisplay extends React.Component {
       jobSatisfaction: "",
       salaryGreaterThan: ""
     };
+
+    this.handleCountryChange = this.handleCountryChange.bind(this);
   }
 
   componentDidMount() {
+    this.callAPI();
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
     this.callAPI();
   }
 
@@ -105,6 +111,20 @@ class GraphDisplay extends React.Component {
     return call;
   }
 
+  handleCountryChange(event) {
+    this.setState({
+      data: this.state.data,
+      loaded: true,
+      call: this.state.call,
+      country: event.target.value,
+      education: this.state.education,
+      devType: this.state.devType,
+      yearsCoding: this.state.yearsCoding,
+      jobSatisfaction: this.state.jobSatisfaction,
+      salaryGreaterThan: this.state.salaryGreaterThan
+    });
+  }
+
   render() {
     if (this.state.loaded) {
       return (
@@ -112,44 +132,39 @@ class GraphDisplay extends React.Component {
           <h2>Languages</h2>
 
           <label for="country">Country</label>
-          <select className="form-control" id="country">
+          <select
+            className="form-control"
+            id="country"
+            onChange={this.handleCountryChange}
+          >
             <option>All</option>
-            <option>U.S.</option>
+            <option>Afghanistan</option>
+            <option>Albania</option>
           </select>
 
           <label for="education">Education</label>
           <select className="form-control" id="education">
             <option>All</option>
-            <option>BS</option>
-            <option>BA</option>
           </select>
 
           <label for="devType">Developer Type</label>
           <select className="form-control" id="devType">
             <option>All</option>
-            <option>Full-stack</option>
-            <option>Front-end</option>
           </select>
 
           <label for="yearsCoding">Years Coding</label>
           <select className="form-control" id="yearsCoding">
             <option>All</option>
-            <option>0 - 1</option>
-            <option>1+</option>
           </select>
 
           <label for="jobSatisfaction">Job Satisfaction</label>
           <select className="form-control" id="jobSatisfaction">
             <option>All</option>
-            <option>Good</option>
-            <option>Bad</option>
           </select>
 
           <label for="salaryGreaterThan">Salary Greater Than</label>
           <select className="form-control" id="salaryGreaterThan">
             <option>All</option>
-            <option>$0</option>
-            <option>$100</option>
           </select>
 
           <br />
