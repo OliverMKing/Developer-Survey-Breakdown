@@ -431,12 +431,16 @@ class GraphDisplay extends React.Component {
               </h5>
               <br />
               <div className="d-flex justify-content-between">
-                <h2 className="lead text-muted">
+                <h1 className="lead text-muted">
                   <strong>Languages</strong>
-                </h2>
-                <h2 className="lead text-muted">
-                  <strong>Frameworks</strong>
-                </h2>
+                </h1>
+                {this.state.framework_data.length > 1 ? (
+                  <h1 className="lead text-muted">
+                    <strong>Frameworks</strong>
+                  </h1>
+                ) : (
+                  <div />
+                )}
                 <div />
               </div>
 
@@ -465,30 +469,36 @@ class GraphDisplay extends React.Component {
                     legend: { position: "none" }
                   }}
                 />
-                <Chart
-                  width={"70%"}
-                  height={"750px"}
-                  chartType="Bar"
-                  loader={<div>Loading Chart</div>}
-                  data={this.state.framework_data}
-                  options={{
-                    hAxis: {
-                      title: "Developers",
-                      minValue: 0
-                    },
-                    vAxis: {
-                      title: "Languages"
-                    },
-                    bars: "horizontal",
+                {this.state.framework_data.length > 1 ? (
+                  <Chart
+                    width={"70%"}
+                    height={"750px"}
+                    chartType="Bar"
+                    loader={<div>Loading Chart</div>}
+                    data={this.state.framework_data}
+                    options={{
+                      hAxis: {
+                        title: "Developers",
+                        minValue: 0
+                      },
+                      vAxis: {
+                        title: "Languages"
+                      },
+                      bars: "horizontal",
 
-                    axes: {
-                      y: {
-                        0: { side: "left" }
-                      }
-                    },
-                    legend: { position: "none" }
-                  }}
-                />
+                      axes: {
+                        y: {
+                          0: { side: "left" }
+                        }
+                      },
+                      legend: { position: "none" }
+                    }}
+                  />
+                ) : (
+                  <h5 className="lead text-muted">
+                    There are 0 framework results for those parameters
+                  </h5>
+                )}
               </div>
             </div>
           ) : (
