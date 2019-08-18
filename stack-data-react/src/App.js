@@ -1,24 +1,18 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import GraphDisplay from "./GraphDisplay.js";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container">
+      <div class="row justify-content-md-center">
+        <h1 className="display-4">Stack Data</h1>
+      </div>
+      <div class="row justify-content-md-center">
+        <h4 className="lead text-muted">
+          Breaking down the Stack Overflow 2018 Developer Survey
+        </h4>
+      </div>
+      <GraphDisplay />
     </div>
   );
 }
