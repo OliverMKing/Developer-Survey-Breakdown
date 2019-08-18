@@ -138,6 +138,7 @@ class GraphDisplay extends React.Component {
             onChange={this.handleCountryChange}
           >
             <option>{this.state.country}</option>
+            <option />
             <option>Afghanistan</option>
             <option>Albania</option>
           </select>
@@ -145,31 +146,36 @@ class GraphDisplay extends React.Component {
           <label for="education">Education</label>
           <select className="form-control" id="education">
             <option>{this.state.education}</option>
+            <option />
           </select>
 
           <label for="devType">Developer Type</label>
           <select className="form-control" id="devType">
             <option>{this.state.devType}</option>
+            <option />
           </select>
 
           <label for="yearsCoding">Years Coding</label>
           <select className="form-control" id="yearsCoding">
             <option>{this.state.yearsCoding}</option>
+            <option />
           </select>
 
           <label for="jobSatisfaction">Job Satisfaction</label>
           <select className="form-control" id="jobSatisfaction">
             <option>{this.state.jobSatisfaction}</option>
+            <option />
           </select>
 
           <label for="salaryGreaterThan">Salary Greater Than</label>
           <select className="form-control" id="salaryGreaterThan">
             <option>{this.state.salaryGreaterThan}</option>
+            <option />
           </select>
 
           <br />
           <Chart
-            width={"300px"}
+            width={"400px"}
             height={"750px"}
             chartType="Bar"
             loader={<div>Loading Chart</div>}

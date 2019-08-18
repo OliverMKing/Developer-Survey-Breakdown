@@ -6,9 +6,15 @@ import java.util.Map;
 
 public class ResponseStatsDTO {
 
-    Integer responseCount;
-    Map<String, Integer> languages = new HashMap();
-    Map<String, Integer> frameworks = new HashMap();
+    private Integer responseCount;
+    private Map<String, Integer> languages = new HashMap<>();
+    private Map<String, Integer> frameworks = new HashMap<>();
+
+    private Map<String, Integer> countries = new HashMap<>();
+    private Map<String, Integer> education = new HashMap<>();
+    private Map<String, Integer> devTypes = new HashMap<>();
+    private Map<String, Integer> yearsCoding = new HashMap<>();
+    private Map<String, Integer> jobSatisfactions = new HashMap<>();
 
     public ResponseStatsDTO() {
     }
@@ -19,10 +25,20 @@ public class ResponseStatsDTO {
     }
 
     private void setLanguagesAndFrameworks(List<ResponseDTO> responseDTOS) {
-        fillLanguageAndFrameworksMaps(responseDTOS, languages, frameworks);
+        fillLanguageAndFrameworksAndPropertiesMaps(responseDTOS,
+                languages,
+                frameworks,
+                countries,
+                education,
+                devTypes,
+                yearsCoding,
+                jobSatisfactions
+        );
     }
 
-    static void fillLanguageAndFrameworksMaps(List<ResponseDTO> responseDTOS, Map<String, Integer> languages, Map<String, Integer> frameworks) {
+    static void fillLanguageAndFrameworksMaps(List<ResponseDTO> responseDTOS,
+                                              Map<String, Integer> languages,
+                                              Map<String, Integer> frameworks) {
         for (ResponseDTO response : responseDTOS) {
             for (String language : response.getLanguages()) {
                 languages.put(language, languages.getOrDefault(language, 0) + 1);
@@ -31,6 +47,79 @@ public class ResponseStatsDTO {
                 frameworks.put(framework, frameworks.getOrDefault(framework, 0) + 1);
             }
         }
+    }
+
+    static void fillLanguageAndFrameworksAndPropertiesMaps(List<ResponseDTO> responseDTOS,
+                                                           Map<String, Integer> languages,
+                                                           Map<String, Integer> frameworks,
+                                                           Map<String, Integer> countries,
+                                                           Map<String, Integer> education,
+                                                           Map<String, Integer> devTypes,
+                                                           Map<String, Integer> yearsCoding,
+                                                           Map<String, Integer> jobSatisfactions
+                                                           ) {
+        for (ResponseDTO response : responseDTOS) {
+            for (String language : response.getLanguages()) {
+                languages.put(language, languages.getOrDefault(language, 0) + 1);
+            }
+            for (String framework : response.getFrameworks()) {
+                frameworks.put(framework, frameworks.getOrDefault(framework, 0) + 1);
+            }
+            if (response.getCountry() != null)
+                countries.put(response.getCountry(), countries.getOrDefault(response.getCountry(), 0) + 1);
+            if (response.getFormalEducation() != null)
+                education.put(response.getFormalEducation(), education.getOrDefault(response.getFormalEducation(), 0) + 1);
+            if (response.getDevType() != null) {
+                String[] types = response.getDevType().split(";");
+                for (String type : types) {
+                    devTypes.put(type, devTypes.getOrDefault(type, 0) + 1);
+                }
+            }
+            if (response.getYearsCoding() != null)
+                yearsCoding.put(response.getYearsCoding(), yearsCoding.getOrDefault(response.getYearsCoding(), 0) + 1);
+            if (response.getJobSatisfaction() != null)
+                jobSatisfactions.put(response.getJobSatisfaction(), jobSatisfactions.getOrDefault(response.getJobSatisfaction(), 0) + 1);
+        }
+    }
+
+    public Map<String, Integer> getYearsCoding() {
+        return yearsCoding;
+    }
+
+    public void setYearsCoding(Map<String, Integer> yearsCoding) {
+        this.yearsCoding = yearsCoding;
+    }
+
+    public Map<String, Integer> getJobSatisfactions() {
+        return jobSatisfactions;
+    }
+
+    public void setJobSatisfactions(Map<String, Integer> jobSatisfactions) {
+        this.jobSatisfactions = jobSatisfactions;
+    }
+
+    public Map<String, Integer> getEducation() {
+        return education;
+    }
+
+    public void setEducation(Map<String, Integer> education) {
+        this.education = education;
+    }
+
+    public Map<String, Integer> getDevTypes() {
+        return devTypes;
+    }
+
+    public void setDevTypes(Map<String, Integer> devTypes) {
+        this.devTypes = devTypes;
+    }
+
+    public Map<String, Integer> getCountries() {
+        return countries;
+    }
+
+    public void setCountries(Map<String, Integer> countries) {
+        this.countries = countries;
     }
 
     public Integer getResponseCount() {
