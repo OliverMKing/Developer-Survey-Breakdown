@@ -474,7 +474,8 @@ class GraphDisplay extends React.Component {
                         0: { side: "left" }
                       }
                     },
-                    legend: { position: "none" }
+                    legend: { position: "none" },
+                    colors: ["#E91E63"]
                   }}
                 />
                 {this.state.framework_data.length > 1 ? (
@@ -499,7 +500,8 @@ class GraphDisplay extends React.Component {
                           0: { side: "left" }
                         }
                       },
-                      legend: { position: "none" }
+                      legend: { position: "none" },
+                      colors: ["#4CAF50"]
                     }}
                   />
                 ) : (
