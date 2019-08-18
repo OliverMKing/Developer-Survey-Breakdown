@@ -44,7 +44,8 @@ class GraphDisplay extends React.Component {
       responseDevTypes: [],
       responseYearsCoding: [],
       responseSatisfactions: [],
-      responseCount: 0
+      responseCount: 0,
+      toggle: false
     };
 
     this.handleCountryChange = this.handleCountryChange.bind(this);
@@ -57,6 +58,7 @@ class GraphDisplay extends React.Component {
     this.handleSalaryGreaterThanChange = this.handleSalaryGreaterThanChange.bind(
       this
     );
+    this.handleToggleChange = this.handleToggleChange.bind(this);
   }
 
   componentDidMount() {
@@ -101,7 +103,8 @@ class GraphDisplay extends React.Component {
         responseDevTypes: devTypes,
         responseYearsCoding: yearsCoding,
         responseSatisfactions: satisfactions,
-        responseCount: responses
+        responseCount: responses,
+        toggle: this.state.toggle
       });
     });
   }
@@ -139,7 +142,8 @@ class GraphDisplay extends React.Component {
         responseDevTypes: this.state.responseDevTypes,
         responseYearsCoding: this.state.responseYearsCoding,
         responseSatisfactions: this.state.responseSatisfactions,
-        responseCount: responses
+        responseCount: responses,
+        toggle: this.state.toggle
       });
     });
   }
@@ -211,7 +215,8 @@ class GraphDisplay extends React.Component {
         responseDevTypes: this.state.responseDevTypes,
         responseYearsCoding: this.state.responseYearsCoding,
         responseSatisfactions: this.state.responseSatisfactions,
-        responseCount: this.state.responseCount
+        responseCount: this.state.responseCount,
+        toggle: this.state.toggle
       },
       this.callAPI
     );
@@ -234,7 +239,8 @@ class GraphDisplay extends React.Component {
         responseDevTypes: this.state.responseDevTypes,
         responseYearsCoding: this.state.responseYearsCoding,
         responseSatisfactions: this.state.responseSatisfactions,
-        responseCount: this.state.responseCount
+        responseCount: this.state.responseCount,
+        toggle: this.state.toggle
       },
       this.callAPI
     );
@@ -257,7 +263,8 @@ class GraphDisplay extends React.Component {
         responseDevTypes: this.state.responseDevTypes,
         responseYearsCoding: this.state.responseYearsCoding,
         responseSatisfactions: this.state.responseSatisfactions,
-        responseCount: this.state.responseCount
+        responseCount: this.state.responseCount,
+        toggle: this.state.toggle
       },
       this.callAPI
     );
@@ -280,7 +287,8 @@ class GraphDisplay extends React.Component {
         responseDevTypes: this.state.responseDevTypes,
         responseYearsCoding: this.state.responseYearsCoding,
         responseSatisfactions: this.state.responseSatisfactions,
-        responseCount: this.state.responseCount
+        responseCount: this.state.responseCount,
+        toggle: this.state.toggle
       },
       this.callAPI
     );
@@ -303,7 +311,8 @@ class GraphDisplay extends React.Component {
         responseDevTypes: this.state.responseDevTypes,
         responseYearsCoding: this.state.responseYearsCoding,
         responseSatisfactions: this.state.responseSatisfactions,
-        responseCount: this.state.responseCount
+        responseCount: this.state.responseCount,
+        toggle: this.state.toggle
       },
       this.callAPI
     );
@@ -326,10 +335,32 @@ class GraphDisplay extends React.Component {
         responseDevTypes: this.state.responseDevTypes,
         responseYearsCoding: this.state.responseYearsCoding,
         responseSatisfactions: this.state.responseSatisfactions,
-        responseCount: this.state.responseCount
+        responseCount: this.state.responseCount,
+        toggle: this.state.toggle
       },
       this.callAPI
     );
+  }
+
+  handleToggleChange(event) {
+    this.setState({
+      data: this.state.data,
+      framework_data: this.state.framework_data,
+      loaded: true,
+      country: this.state.country,
+      education: this.state.education,
+      devType: this.state.devType,
+      yearsCoding: this.state.yearsCoding,
+      jobSatisfaction: this.state.yearsCoding,
+      salaryGreaterThan: this.state.salaryGreaterThan,
+      responseCountries: this.state.responseCountries,
+      responseEducation: this.state.responseEducation,
+      responseDevTypes: this.state.responseDevTypes,
+      responseYearsCoding: this.state.responseYearsCoding,
+      responseSatisfactions: this.state.responseSatisfactions,
+      responseCount: this.state.responseCount,
+      toggle: !this.state.toggle
+    });
   }
 
   render() {
@@ -345,11 +376,15 @@ class GraphDisplay extends React.Component {
             data-target={"#" + this.props.number}
             aria-expanded="false"
             aria-controls="options"
+            onClick={this.handleToggleChange}
           >
             Toggle Options
           </button>
 
-          <div class="collapse show" id={this.props.number}>
+          <div
+            class={"collapse" + (this.state.toggle ? " show" : "")}
+            id={this.props.number}
+          >
             <label>Country</label>
             <select
               className="form-control"
