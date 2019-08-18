@@ -19,6 +19,19 @@ class GraphDisplay extends React.Component {
           }
         ]
       ],
+      framework_data: [
+        [
+          "",
+          "Number of developers",
+          { role: "style" },
+          {
+            sourceColumn: 0,
+            role: "annotation",
+            type: "string",
+            calc: "stringify"
+          }
+        ]
+      ],
       loaded: false,
       country: "",
       education: "",
@@ -58,6 +71,14 @@ class GraphDisplay extends React.Component {
         langData.push(row);
       }
 
+      let frameworkData = [this.state.framework_data[0]];
+      for (const [framework, count] of Object.entries(
+        response.data.frameworks
+      )) {
+        const row = [framework, count, "#007bff", null];
+        frameworkData.push(row);
+      }
+
       const countries = Object.keys(response.data.countries);
       const education = Object.keys(response.data.education);
       const devTypes = Object.keys(response.data.devTypes);
@@ -67,6 +88,7 @@ class GraphDisplay extends React.Component {
 
       this.setState({
         data: langData,
+        framework_data: frameworkData,
         loaded: true,
         country: this.state.country,
         education: this.state.education,
@@ -92,10 +114,19 @@ class GraphDisplay extends React.Component {
         langData.push(row);
       }
 
+      let frameworkData = [this.state.framework_data[0]];
+      for (const [framework, count] of Object.entries(
+        response.data.frameworks
+      )) {
+        const row = [framework, count, "#007bff", null];
+        frameworkData.push(row);
+      }
+
       const responses = response.data.responseCount;
 
       this.setState({
         data: langData,
+        framework_data: frameworkData,
         loaded: true,
         country: this.state.country,
         education: this.state.education,
@@ -167,6 +198,7 @@ class GraphDisplay extends React.Component {
     this.setState(
       {
         data: this.state.data,
+        framework_data: this.state.framework_data,
         loaded: false,
         country: event.target.value,
         education: this.state.education,
@@ -189,6 +221,7 @@ class GraphDisplay extends React.Component {
     this.setState(
       {
         data: this.state.data,
+        framework_data: this.state.framework_data,
         loaded: false,
         country: this.state.country,
         education: event.target.value,
@@ -211,6 +244,7 @@ class GraphDisplay extends React.Component {
     this.setState(
       {
         data: this.state.data,
+        framework_data: this.state.framework_data,
         loaded: false,
         country: this.state.country,
         education: this.state.education,
@@ -233,6 +267,7 @@ class GraphDisplay extends React.Component {
     this.setState(
       {
         data: this.state.data,
+        framework_data: this.state.framework_data,
         loaded: false,
         country: this.state.country,
         education: this.state.education,
@@ -255,6 +290,7 @@ class GraphDisplay extends React.Component {
     this.setState(
       {
         data: this.state.data,
+        framework_data: this.state.framework_data,
         loaded: false,
         country: this.state.country,
         education: this.state.education,
@@ -277,6 +313,7 @@ class GraphDisplay extends React.Component {
     this.setState(
       {
         data: this.state.data,
+        framework_data: this.state.framework_data,
         loaded: false,
         country: this.state.country,
         education: this.state.education,
@@ -299,8 +336,6 @@ class GraphDisplay extends React.Component {
     if (this.state.loaded) {
       return (
         <div>
-          <h2>Languages</h2>
-
           <label>Country</label>
           <select
             className="form-control"
@@ -395,31 +430,66 @@ class GraphDisplay extends React.Component {
                 Responses: {this.state.responseCount}
               </h5>
               <br />
+              <div className="d-flex justify-content-between">
+                <h2 className="lead text-muted">
+                  <strong>Languages</strong>
+                </h2>
+                <h2 className="lead text-muted">
+                  <strong>Frameworks</strong>
+                </h2>
+                <div />
+              </div>
 
-              <Chart
-                width={"80%"}
-                height={"750px"}
-                chartType="Bar"
-                loader={<div>Loading Chart</div>}
-                data={this.state.data}
-                options={{
-                  hAxis: {
-                    title: "Developers",
-                    minValue: 0
-                  },
-                  vAxis: {
-                    title: "Languages"
-                  },
-                  bars: "horizontal",
+              <div className="d-flex justify-content-between">
+                <Chart
+                  width={"70%"}
+                  height={"750px"}
+                  chartType="Bar"
+                  loader={<div>Loading Chart</div>}
+                  data={this.state.data}
+                  options={{
+                    hAxis: {
+                      title: "Developers",
+                      minValue: 0
+                    },
+                    vAxis: {
+                      title: "Languages"
+                    },
+                    bars: "horizontal",
 
-                  axes: {
-                    y: {
-                      0: { side: "left" }
-                    }
-                  },
-                  legend: { position: "none" }
-                }}
-              />
+                    axes: {
+                      y: {
+                        0: { side: "left" }
+                      }
+                    },
+                    legend: { position: "none" }
+                  }}
+                />
+                <Chart
+                  width={"70%"}
+                  height={"750px"}
+                  chartType="Bar"
+                  loader={<div>Loading Chart</div>}
+                  data={this.state.framework_data}
+                  options={{
+                    hAxis: {
+                      title: "Developers",
+                      minValue: 0
+                    },
+                    vAxis: {
+                      title: "Languages"
+                    },
+                    bars: "horizontal",
+
+                    axes: {
+                      y: {
+                        0: { side: "left" }
+                      }
+                    },
+                    legend: { position: "none" }
+                  }}
+                />
+              </div>
             </div>
           ) : (
             <div>
