@@ -13,3 +13,6 @@ A full stack web application that allows users to breakdown the Stack Overflow D
 4. Install all dependencies (use npm install for React)
 5. Run both the Spring project and the React project (use npm start for React)
 6. Visit http://localhost:3000/
+
+## Demo Video
+[![Demo Video](https://img.youtube.com/vi/MeAujgK-QNs/hqdefault.jpg)](https://www.youtube.com/watch?v=MeAujgK-QNs)
