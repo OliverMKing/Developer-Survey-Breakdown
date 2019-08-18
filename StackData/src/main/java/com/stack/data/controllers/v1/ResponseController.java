@@ -27,6 +27,7 @@ public class ResponseController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
+    @CrossOrigin(origins = "http://localhost:3000")
     public ResponseListDTO getResponses(@RequestParam(name = "country", required = false) String country,
                                         @RequestParam(name = "formalEducation", required = false) String formalEducation,
                                         @RequestParam(name = "devType", required = false) String devType,
@@ -58,6 +59,7 @@ public class ResponseController {
 
     @GetMapping("/stats")
     @ResponseStatus(HttpStatus.OK)
+    @CrossOrigin(origins = "http://localhost:3000")
     public ResponseStatsDTO getResponsesStats(@RequestParam(name = "country", required = false) String country,
                                              @RequestParam(name = "formalEducation", required = false) String formalEducation,
                                              @RequestParam(name = "devType", required = false) String devType,
