@@ -337,18 +337,19 @@ class GraphDisplay extends React.Component {
       return (
         <div>
           <br />
+          <hr />
           <button
             class="btn btn-primary"
             type="button"
             data-toggle="collapse"
-            data-target="#options"
+            data-target={"#" + this.props.number}
             aria-expanded="false"
             aria-controls="options"
           >
             Toggle Options
           </button>
 
-          <div class="collapse" id="options">
+          <div class="collapse" id={this.props.number}>
             <label>Country</label>
             <select
               className="form-control"
