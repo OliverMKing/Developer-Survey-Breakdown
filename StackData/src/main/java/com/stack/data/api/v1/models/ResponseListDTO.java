@@ -3,12 +3,13 @@ package com.stack.data.api.v1.models;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 public class ResponseListDTO {
 
     Integer responseCount;
-    Map<String, Integer> languages = new HashMap();
-    Map<String, Integer> frameworks = new HashMap();
+    Map<String, Integer> languages = new TreeMap<>();
+    Map<String, Integer> frameworks = new TreeMap<>();
     List<ResponseDTO> responseDTOS;
 
     public ResponseListDTO() {

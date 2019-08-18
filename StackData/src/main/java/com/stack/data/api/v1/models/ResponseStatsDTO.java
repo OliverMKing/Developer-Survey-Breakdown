@@ -3,18 +3,19 @@ package com.stack.data.api.v1.models;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 public class ResponseStatsDTO {
 
     private Integer responseCount;
-    private Map<String, Integer> languages = new HashMap<>();
-    private Map<String, Integer> frameworks = new HashMap<>();
+    private Map<String, Integer> languages = new TreeMap<>();
+    private Map<String, Integer> frameworks = new TreeMap<>();
 
-    private Map<String, Integer> countries = new HashMap<>();
-    private Map<String, Integer> education = new HashMap<>();
-    private Map<String, Integer> devTypes = new HashMap<>();
-    private Map<String, Integer> yearsCoding = new HashMap<>();
-    private Map<String, Integer> jobSatisfactions = new HashMap<>();
+    private Map<String, Integer> countries = new TreeMap<>();
+    private Map<String, Integer> education = new TreeMap<>();
+    private Map<String, Integer> devTypes = new TreeMap<>();
+    private Map<String, Integer> yearsCoding = new TreeMap<>();
+    private Map<String, Integer> jobSatisfactions = new TreeMap<>();
 
     public ResponseStatsDTO() {
     }
