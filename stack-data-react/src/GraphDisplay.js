@@ -407,7 +407,15 @@ class GraphDisplay extends React.Component {
             id="salaryGreaterThan"
             onChange={this.handleSalaryGreaterThanChange}
           >
-            <option>{this.state.salaryGreaterThan}</option>
+            <option>
+              {this.state.salaryGreaterThan
+                ? "$" +
+                  this.state.salaryGreaterThan.replace(
+                    /\B(?=(\d{3})+(?!\d))/g,
+                    ","
+                  )
+                : ""}
+            </option>
             <option />
             <option>$20,000</option>
             <option>$40,000</option>
