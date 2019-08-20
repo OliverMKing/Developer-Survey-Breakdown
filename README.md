@@ -1,4 +1,4 @@
-# Stack-Data
+# Developer Survey Breakdown
 A full stack web application that allows users to breakdown the Stack Overflow Developer Survey. Uses Spring Boot as a REST API and React as the front-end that calls the API and generates views based off responses.
 
 ## Features
