@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/StackData/StackData.iml" filepath="$PROJECT_DIR$/StackData/StackData.iml" />
+      <module fileurl="file://$PROJECT_DIR$/StackData/stack_data.iml" filepath="$PROJECT_DIR$/StackData/stack_data.iml" />
     </modules>
   </component>
 </project>

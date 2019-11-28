@@ -9,6 +9,8 @@ import com.stack.data.services.ResponseServiceBuilder;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+
 @RestController
 @RequestMapping(ResponseController.BASE_URL)
 public class ResponseController {
@@ -18,6 +20,7 @@ public class ResponseController {
     private final ResponseService responseService;
     private final ResponseRepository responseRepository;
     private final ResponseMapper responseMapper;
+    private final HashMap<String, ResponseStatsDTO> cache = new HashMap<>();
 
     public ResponseController(ResponseService responseService, ResponseRepository responseRepository, ResponseMapper responseMapper) {
         this.responseService = responseService;
@@ -69,6 +72,14 @@ public class ResponseController {
                                              @RequestParam(name = "salaryGreaterThan", required = false) Double salaryGreaterThan,
                                              @RequestParam(name = "salaryLessThan", required = false) Double salaryLessThan
                                              ) {
+
+        // Check if query has been made before
+        String params = String.format("country=%s&formalEducation=%s&devType=%s&yearsCoding=%s&jobSatisfaction=%s&salary=%s&salaryGreaterThan=%s&salaryLessThan=%s",
+                country, formalEducation, devType, yearsCoding, jobSatisfaction, salary, salaryGreaterThan, salaryLessThan);
+        if (cache.containsKey(params)) {
+            return cache.get(params);
+        }
+
         ResponseServiceBuilder responseServiceBuilder = new ResponseServiceBuilder(responseRepository, responseMapper);
         if (country != null)
             responseServiceBuilder.country(country);
@@ -86,6 +97,9 @@ public class ResponseController {
             responseServiceBuilder.salaryGreaterThan(salaryGreaterThan);
         if (salaryLessThan != null)
             responseServiceBuilder.salaryLessThan(salaryLessThan);
-        return new ResponseStatsDTO(responseServiceBuilder.build());
+
+        ResponseStatsDTO responseStatsDTO = new ResponseStatsDTO(responseServiceBuilder.build());
+        cache.put(params, responseStatsDTO);
+        return responseStatsDTO;
     }
 }

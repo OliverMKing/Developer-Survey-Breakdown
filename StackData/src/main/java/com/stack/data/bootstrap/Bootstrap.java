@@ -18,7 +18,7 @@ import java.util.Set;
 public class Bootstrap implements CommandLineRunner {
 
     private final ResponseService responseService;
-    private final String CSV_URL = "C:\\Users\\Oliver\\Desktop\\survey_results_public.csv";
+    private final String CSV_URL = "/home/camoclone/IdeaProjects/survey_results_public.csv";
     private static final Logger logger = LoggerFactory.getLogger(Bootstrap.class);
 
     public Bootstrap(ResponseService responseService) {
